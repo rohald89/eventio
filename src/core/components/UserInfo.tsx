@@ -3,7 +3,7 @@ import logout from "@/features/auth/mutations/logout";
 import { useCurrentUser } from "@/features/users/hooks/useCurrentUser";
 import Link from "next/link";
 import { Routes } from "@blitzjs/next";
-import { Anchor, Button } from "@mantine/core";
+import { Button } from "@mantine/core";
 
 const UserInfo = () => {
   const currentUser = useCurrentUser();

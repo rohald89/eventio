@@ -1,7 +1,5 @@
 import Layout from "@/core/layouts/Layout";
-import { LabeledTextField } from "@/core/components/LabeledTextField";
-import { Form, FORM_ERROR } from "@/core/components/Form";
-import { ForgotPassword } from "@/features/auth/schemas";
+import { FORM_ERROR } from "@/core/components/Form";
 import forgotPassword from "@/features/auth/mutations/forgotPassword";
 import { useMutation } from "@blitzjs/rpc";
 import { BlitzPage } from "@blitzjs/next";
