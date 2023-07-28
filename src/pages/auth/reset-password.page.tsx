@@ -15,7 +15,7 @@ const ResetPasswordPage: BlitzPage = () => {
   const [resetPasswordMutation, { isSuccess }] = useMutation(resetPassword);
 
   return (
-    <Layout title="Reset Your Password" maxWidth={1000}>
+    <Layout title="Reset Your Password">
       <div>
         <h1>Set a New Password</h1>
 

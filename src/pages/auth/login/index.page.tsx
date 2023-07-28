@@ -2,6 +2,7 @@ import { BlitzPage } from "@blitzjs/next";
 import Layout from "@/core/layouts/Layout";
 import { LoginForm } from "@/pages/auth/login/components/LoginForm";
 import { useRouter } from "next/router";
+import { Button } from "@mantine/core";
 
 const LoginPage: BlitzPage = () => {
   const router = useRouter();
