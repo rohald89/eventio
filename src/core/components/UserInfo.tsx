@@ -3,6 +3,7 @@ import logout from "@/features/auth/mutations/logout";
 import { useCurrentUser } from "@/features/users/hooks/useCurrentUser";
 import Link from "next/link";
 import { Routes } from "@blitzjs/next";
+import { Anchor, Button } from "@mantine/core";
 
 const UserInfo = () => {
   const currentUser = useCurrentUser();
@@ -11,13 +12,13 @@ const UserInfo = () => {
   if (currentUser) {
     return (
       <>
-        <button
+        <Button
           onClick={async () => {
             await logoutMutation();
           }}
         >
           Logout
-        </button>
+        </Button>
         <div>
           User id: <code>{currentUser.id}</code>
           <br />
@@ -28,12 +29,12 @@ const UserInfo = () => {
   } else {
     return (
       <>
-        <Link href={Routes.SignupPage()}>
-          <strong>Sign Up</strong>
-        </Link>
-        <Link href={Routes.LoginPage()}>
-          <strong>Login</strong>
-        </Link>
+        <Button component={Link} href={Routes.SignupPage()}>
+          Sign Up
+        </Button>
+        <Button component={Link} href={Routes.LoginPage()}>
+          Login
+        </Button>
       </>
     );
   }
