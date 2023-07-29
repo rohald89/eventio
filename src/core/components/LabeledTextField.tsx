@@ -1,7 +1,6 @@
 import { forwardRef, PropsWithoutRef, ComponentPropsWithoutRef } from "react";
 import { useFormContext } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
-import { Input } from "@mantine/core";
 
 export interface LabeledTextFieldProps extends PropsWithoutRef<JSX.IntrinsicElements["input"]> {
   /** Field name. */
@@ -25,7 +24,7 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
       <div {...outerProps}>
         <label {...labelProps}>
           {label}
-          <Input disabled={isSubmitting} {...register(name)} {...props} />
+          <input disabled={isSubmitting} {...register(name)} {...props} />
         </label>
 
         <ErrorMessage
