@@ -5,17 +5,24 @@ import { useMutation, useQuery } from "@blitzjs/rpc";
 import getTodos from "@/features/todos/queries/getTodos";
 import { Button, Checkbox, Input, List, Loader, Text } from "@mantine/core";
 import addTodo from "@/features/todos/mutations/addTodo";
-import { notifications } from "@mantine/notifications";
 import { Horizontal, Vertical } from "mantine-layout-components";
 import { useCurrentUser } from "@/features/users/hooks/useCurrentUser";
 import toggleTodo from "@/features/todos/mutations/toggleTodo";
 import cleanCompleted from "@/features/todos/mutations/cleanCompleted";
+import { ReactFC } from "types";
+import { PromiseReturnType } from "blitz";
 
-const Todo = ({ todo }) => {
-  const [$toggleTodo] = useMutation(toggleTodo);
+type TodosType = PromiseReturnType<typeof getTodos>;
+type TodoType = TodosType[0];
+
+const Todo: ReactFC<{
+  todo: TodoType;
+}> = ({ todo }) => {
+  const [$toggleTodo, { isLoading }] = useMutation(toggleTodo);
   return (
     <Horizontal>
       <Checkbox
+        disabled={isLoading}
         checked={todo.done}
         onClick={async () => {
           await $toggleTodo({ id: todo.id });
@@ -32,7 +39,7 @@ const Todos = () => {
 
   const [title, setTitle] = React.useState("");
 
-  const [$addTodo] = useMutation(addTodo);
+  const [$addTodo, { isLoading }] = useMutation(addTodo);
 
   const [$cleanCompleted] = useMutation(cleanCompleted);
 
@@ -45,6 +52,7 @@ const Todos = () => {
         placeholder="Enter todo title"
       />
       <Button
+        loading={isLoading}
         onClick={async () =>
           await $addTodo({
             title,

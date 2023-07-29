@@ -7,7 +7,9 @@
     "start": "blitz start",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
     "db:studio": "BROWSER=none blitz prisma studio",
-    "db:migrate": "blitz prisma migrate dev"
+    "db:migrate": "blitz prisma migrate dev",
+    "--------------------railway": "--------------------",
+    "railway:dev": "railway run yarn dev"
   },
   "prisma": {
     "schema": "db/schema.prisma"

@@ -1,23 +1,41 @@
 import Head from "next/head";
 import { ReactNode, Suspense } from "react";
-import { BlitzLayout, Routes } from "@blitzjs/next";
+import { ErrorBoundary, Routes } from "@blitzjs/next";
 import { Horizontal, Vertical } from "mantine-layout-components";
-import { Anchor, AppShell, Button, Footer, Header, Loader, Navbar, Text } from "@mantine/core";
+import {
+  Anchor,
+  AppShell,
+  Button,
+  Footer,
+  Header,
+  Loader,
+  Navbar,
+  Text,
+  Tooltip,
+} from "@mantine/core";
 import Link from "next/link";
 import logout from "@/features/auth/mutations/logout";
 import { useMutation } from "@blitzjs/rpc";
 import { useCurrentUser } from "@/features/users/hooks/useCurrentUser";
+import type { ReactFC } from "types";
+import { IconUserShield } from "@tabler/icons-react";
+import RootErrorFallback from "../components/RootErrorFallback";
+import { useRouter } from "next/router";
 
 type Props = {
   title?: string;
   children?: ReactNode;
   maxWidth?: number;
 };
-const Layout: BlitzLayout<Props> = ({ title, maxWidth = 800, children }) => {
+const Layout: ReactFC<{
+  title?: string;
+  maxWidth?: number;
+}> = ({ title, maxWidth = 800, children }) => {
   const thisYear = new Date().getFullYear();
   const [logoutMutation] = useMutation(logout);
 
   const user = useCurrentUser();
+  const router = useRouter();
 
   return (
     <>
@@ -46,13 +64,21 @@ const Layout: BlitzLayout<Props> = ({ title, maxWidth = 800, children }) => {
                 Eventio
               </Anchor>
               {user && (
-                <Horizontal>
-                  <Text>{user.name}</Text>
+                <Horizontal center>
+                  <Horizontal center spacing="xs">
+                    <Text>{user.name}</Text>
+                    {user.isAdmin && (
+                      <Tooltip label="Admin">
+                        <IconUserShield size={15} />
+                      </Tooltip>
+                    )}
+                  </Horizontal>
                   <Button
                     size="xs"
                     variant="light"
                     onClick={async () => {
                       await logoutMutation();
+                      await router.push("/");
                     }}
                   >
                     Logout
@@ -79,7 +105,9 @@ const Layout: BlitzLayout<Props> = ({ title, maxWidth = 800, children }) => {
         }
       >
         <Vertical fullW fullH>
-          <Suspense fallback={<Loader />}>{children}</Suspense>
+          <ErrorBoundary resetKeys={[user]} FallbackComponent={RootErrorFallback}>
+            <Suspense fallback={<Loader />}>{children}</Suspense>
+          </ErrorBoundary>
         </Vertical>
       </AppShell>
     </>
