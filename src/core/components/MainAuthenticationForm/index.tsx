@@ -23,8 +23,8 @@ import signup from "@/features/auth/mutations/signup";
 
 export function AuthenticationForm(props: PaperProps) {
   const [type, toggle] = useToggle(["login", "register"]);
-  const [loginMutation] = useMutation(login);
-  const [signupMutation] = useMutation(signup);
+  const [$login] = useMutation(login);
+  const [$signup] = useMutation(signup);
 
   const form = useForm({
     initialValues: {
@@ -42,7 +42,7 @@ export function AuthenticationForm(props: PaperProps) {
 
   const onLogin = async (values) => {
     try {
-      const user = await loginMutation(values);
+      const user = await $login(values);
     } catch (error: any) {
       if (error instanceof AuthenticationError) {
         return { [FORM_ERROR]: "Sorry, those credentials are invalid" };
@@ -57,7 +57,7 @@ export function AuthenticationForm(props: PaperProps) {
 
   let onSignUp = async (values) => {
     try {
-      await signupMutation(values);
+      await $signup(values);
     } catch (error: any) {
       if (error.code === "P2002" && error.meta?.target?.includes("email")) {
         return { email: "This email is already being used" };
@@ -67,11 +67,11 @@ export function AuthenticationForm(props: PaperProps) {
     }
   };
 
-  const onSubmit = (values) => {
+  const onSubmit = async (values) => {
     if (type === "login") {
-      onLogin(values);
+      await onLogin(values);
     } else {
-      onSignUp(values);
+      await onSignUp(values);
     }
   };
 
@@ -92,10 +92,10 @@ export function AuthenticationForm(props: PaperProps) {
         <Stack>
           {type === "register" && (
             <TextInput
+              required
               label="Name"
               placeholder="Your name"
-              value={form.values.name}
-              onChange={(event) => form.setFieldValue("name", event.currentTarget.value)}
+              {...form.getInputProps("name")}
               radius="md"
             />
           )}

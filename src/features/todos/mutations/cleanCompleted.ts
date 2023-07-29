@@ -2,28 +2,17 @@ import { resolver } from "@blitzjs/rpc";
 import db from "db";
 import { z } from "zod";
 
-const Input = z.object({
-  search: z.string().optional(),
-});
+const Input = z.object({});
 
 export default resolver.pipe(
   resolver.zod(Input),
   resolver.authorize(),
   async ({}, { session: { userId } }) => {
-    const todos = await db.todo.findMany({
+    return db.todo.deleteMany({
       where: {
+        done: true,
         userId,
       },
-      orderBy: {
-        createdAt: "desc",
-      },
-      select: {
-        id: true,
-        title: true,
-        done: true,
-      },
     });
-
-    return todos;
   }
 );
