@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "blitz dev",
-    "build": "npm blitz prisma migrate deploy && npm blitz prisma generate && npm blitz build",
+    "build": "yarn blitz prisma migrate deploy && yarn blitz prisma generate && yarn blitz build",
     "start": "blitz start",
     "lint": "eslint --ignore-path .gitignore --ext .js,.ts,.tsx .",
     "db:studio": "BROWSER=none blitz prisma studio",
