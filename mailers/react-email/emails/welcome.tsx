@@ -46,7 +46,7 @@ export const EmailTemplateWelcome: React.FC<{
             </Button>
             <Text style={paragraph}>— The Eventio team</Text>
             <Hr style={hr} />
-            <Text style={footer}>Eventio, 1234 Chuckle Street, Giggletown, LOL 98765</Text>
+            <Text style={footer}>Eventio, 1234 Chuckle Street, GiggleTown, LOL 98765</Text>
           </Section>
         </Container>
       </Body>
