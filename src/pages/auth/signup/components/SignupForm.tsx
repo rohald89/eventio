@@ -1,4 +1,3 @@
-import { FORM_ERROR } from "src/core/components/Form";
 import signup from "@/features/auth/mutations/signup";
 import { useMutation } from "@blitzjs/rpc";
 import { Vertical } from "mantine-layout-components";
@@ -20,7 +19,7 @@ export const SignupForm = (props: SignupFormProps) => {
       if (error.code === "P2002" && error.meta?.target?.includes("email")) {
         return { email: "This email is already being used" };
       } else {
-        return { [FORM_ERROR]: error.toString() };
+        // return { [FORM_ERROR]: error.toString() };
       }
     }
   };

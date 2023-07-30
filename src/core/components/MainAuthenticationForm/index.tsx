@@ -1,5 +1,5 @@
 import { useToggle, upperFirst } from "@mantine/hooks";
-import { useForm } from "@mantine/form";
+import { useForm, zodResolver } from "@mantine/form";
 import {
   TextInput,
   PasswordInput,
@@ -19,27 +19,23 @@ import { GoogleButton, TwitterButton } from "./SocialButtons";
 import login from "@/features/auth/mutations/login";
 import signup from "@/features/auth/mutations/signup";
 import { Vertical } from "mantine-layout-components";
+import { Signup } from "@/features/auth/schemas";
+import { z } from "zod";
+
+type SignUpFormType = z.infer<typeof Signup>;
 
 export function AuthenticationForm(props: PaperProps) {
   const [type, toggle] = useToggle(["login", "register"]);
   const [$login, { isLoading: isLoggingIn }] = useMutation(login);
   const [$signup, { isLoading: isSigningUp }] = useMutation(signup);
 
-  const form = useForm({
-    initialValues: {
-      email: "",
-      name: "",
-      password: "",
-      terms: true,
-    },
-
-    validate: {
-      email: (val) => (/^\S+@\S+$/.test(val) ? null : "Invalid email"),
-      password: (val) => (val.length <= 6 ? "Password should include at least 6 characters" : null),
-    },
+  const form = useForm<SignUpFormType>({
+    validate: zodResolver(Signup),
+    validateInputOnBlur: true,
+    validateInputOnChange: ["terms"],
   });
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values: SignUpFormType) => {
     if (type === "login") {
       await $login(values);
     } else {
@@ -48,6 +44,7 @@ export function AuthenticationForm(props: PaperProps) {
   };
 
   const loading = isLoggingIn || isSigningUp;
+
   return (
     <Vertical mih="100vh" center fullH fullW>
       <Paper radius="md" p="xl" withBorder {...props}>
@@ -93,8 +90,7 @@ export function AuthenticationForm(props: PaperProps) {
             {type === "register" && (
               <Checkbox
                 label="I accept terms and conditions"
-                checked={form.values.terms}
-                onChange={(event) => form.setFieldValue("terms", event.currentTarget.checked)}
+                {...form.getInputProps("terms", { type: "checkbox" })}
               />
             )}
           </Stack>
@@ -111,7 +107,7 @@ export function AuthenticationForm(props: PaperProps) {
                 ? "Already have an account? Login"
                 : "Don't have an account? Register"}
             </Anchor>
-            <Button loading={loading} type="submit" radius="xl">
+            <Button disabled={!form.isValid()} loading={loading} type="submit" radius="xl">
               {upperFirst(type)}
             </Button>
           </Group>

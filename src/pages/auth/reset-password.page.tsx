@@ -1,12 +1,11 @@
 import Layout from "@/core/layouts/Layout";
-import { FORM_ERROR } from "@/core/components/Form";
 import resetPassword from "@/features/auth/mutations/resetPassword";
 import { BlitzPage, Routes } from "@blitzjs/next";
 import { useRouter } from "next/router";
 import { useMutation } from "@blitzjs/rpc";
 import Link from "next/link";
 import { assert } from "blitz";
-import { Button, PasswordInput, TextInput } from "@mantine/core";
+import { Button, PasswordInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 
 const ResetPasswordPage: BlitzPage = () => {
@@ -22,20 +21,8 @@ const ResetPasswordPage: BlitzPage = () => {
   });
 
   const onSubmit = async (values) => {
-    try {
-      assert(token, "token is required.");
-      await resetPasswordMutation({ ...values, token });
-    } catch (error: any) {
-      if (error.name === "ResetPasswordError") {
-        return {
-          [FORM_ERROR]: error.message,
-        };
-      } else {
-        return {
-          [FORM_ERROR]: "Sorry, we had an unexpected error. Please try again.",
-        };
-      }
-    }
+    assert(token, "token is required.");
+    await resetPasswordMutation({ ...values, token });
   };
 
   return (

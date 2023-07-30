@@ -10,7 +10,6 @@ export default resolver.pipe(
   resolver.zod(Input),
   resolver.authorize(),
   async ({}, { session: { userId } }) => {
-    throw new Error("no bueno");
     const todos = await db.todo.findMany({
       where: {
         userId,
