@@ -4,6 +4,9 @@ import db from "db";
 import { Role } from "types";
 import { Signup } from "../schemas";
 import { PrismaError } from "@/utils/blitz";
+import { sendEmail } from "mailers/sendEmail";
+import React from "react";
+import EmailTemplateWelcome from "mailers/react-email/emails/welcome";
 
 export default resolver.pipe(resolver.zod(Signup), async ({ name, email, password }, ctx) => {
   const existingUser = await db.user.findFirst({
@@ -25,6 +28,15 @@ export default resolver.pipe(resolver.zod(Signup), async ({ name, email, passwor
     });
 
     if (user) {
+      await sendEmail({
+        to: user.email,
+        subject: "Welcome to Eventio",
+        react: React.createElement(EmailTemplateWelcome, {
+          props: {
+            name: user.name,
+          },
+        }),
+      });
       await ctx.session.$create({ userId: user.id, role: user.role as Role });
       return user;
     }
