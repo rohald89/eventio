@@ -18,8 +18,8 @@ const Home: BlitzPage = () => {
         <Vertical>
           {user.isAdmin && (
             <Button
-              onClick={() => {
-                $adminOnlyMutation();
+              onClick={async () => {
+                await $adminOnlyMutation();
               }}
             >
               Admin only button
