@@ -13,7 +13,7 @@ export const password = z
 
 export const name = z.string().min(2);
 
-export const Signup = z.object({
+export const SignupInput = z.object({
   email,
   password,
   name,
@@ -22,10 +22,14 @@ export const Signup = z.object({
   }),
 });
 
-export const Login = z.object({
+export type SignUpFormType = z.infer<typeof SignupInput>;
+
+export const LoginInput = z.object({
   email,
   password: z.string(),
 });
+
+export type LoginFormType = z.infer<typeof LoginInput>;
 
 export const ForgotPasswordInput = z.object({
   email,
