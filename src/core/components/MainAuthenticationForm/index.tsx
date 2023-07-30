@@ -14,9 +14,7 @@ import {
   Stack,
 } from "@mantine/core";
 import { useMutation } from "@blitzjs/rpc";
-import { AuthenticationError } from "blitz";
 
-import { FORM_ERROR } from "../Form";
 import { GoogleButton, TwitterButton } from "./SocialButtons";
 import login from "@/features/auth/mutations/login";
 import signup from "@/features/auth/mutations/signup";
