@@ -39,7 +39,7 @@ export const SignupForm: ReactFC<{
 
   return (
     <Vertical mih="100vh" center fullH fullW>
-      <Paper radius="md" p="xl" withBorder {...props}>
+      <Paper radius="md" p="xl" withBorder>
         <Text size="lg" weight={500}>
           Welcome to Eventio, Sign Up with
         </Text>
