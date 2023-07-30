@@ -2,17 +2,7 @@ import Head from "next/head";
 import { ReactNode, Suspense } from "react";
 import { ErrorBoundary, Routes } from "@blitzjs/next";
 import { Horizontal, Vertical } from "mantine-layout-components";
-import {
-  Anchor,
-  AppShell,
-  Button,
-  Footer,
-  Header,
-  Loader,
-  Navbar,
-  Text,
-  Tooltip,
-} from "@mantine/core";
+import { Anchor, AppShell, Button, Footer, Header, Loader, Text, Tooltip } from "@mantine/core";
 import Link from "next/link";
 import logout from "@/features/auth/mutations/logout";
 import { useMutation } from "@blitzjs/rpc";
@@ -66,7 +56,9 @@ const Layout: ReactFC<{
               {user && (
                 <Horizontal center>
                   <Horizontal center spacing="xs">
-                    <Text>{user.name}</Text>
+                    <Link href={Routes.EditProfilePage()}>
+                      <Text>{user.name}</Text>
+                    </Link>
                     {user.isAdmin && (
                       <Tooltip label="Admin">
                         <IconUserShield size={15} />

@@ -1,4 +1,5 @@
 import Layout from "@/core/layouts/Layout";
+import EditProfileForm from "@/features/users/forms/EditProfileForm";
 import { useCurrentUser } from "@/features/users/hooks/useCurrentUser";
 import updateProfile from "@/features/users/mutations/updateProfile";
 import getUserForProfile from "@/features/users/queries/getUserForProfile";
@@ -6,8 +7,8 @@ import { UpdateProfileFormType, UpdateProfileInput } from "@/features/users/sche
 import { useStringParam } from "@/utils/utils";
 import { BlitzPage, Routes } from "@blitzjs/next";
 import { useMutation, useQuery } from "@blitzjs/rpc";
-import { Box, Button, Modal, Text, TextInput, Textarea } from "@mantine/core";
-import { Form, useForm, zodResolver } from "@mantine/form";
+import { Button, Modal, Text } from "@mantine/core";
+import { useForm, zodResolver } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { showNotification } from "@mantine/notifications";
 import { Vertical } from "mantine-layout-components";
@@ -62,38 +63,15 @@ export const ProfilePage: BlitzPage = () => {
 
   return (
     <>
-      <Modal opened={opened} onClose={close} title="Edit Profile">
-        <Form form={form} onSubmit={onSubmit}>
-          <Vertical fullW>
-            <TextInput
-              w="100%"
-              required
-              label="Name"
-              placeholder="Your name"
-              {...form.getInputProps("name")}
-              radius="md"
-            />
-            <TextInput
-              w="100%"
-              required
-              label="Username"
-              placeholder="Your username"
-              {...form.getInputProps("username")}
-              radius="md"
-            />
-            <Textarea
-              w="100%"
-              required
-              label="Bio"
-              placeholder="Your Bio"
-              {...form.getInputProps("bio")}
-              radius="md"
-            />
-            <Button disabled={!form.isValid()} loading={isLoading} type="submit">
-              Save
-            </Button>
-          </Vertical>
-        </Form>
+      <Modal
+        opened={opened}
+        onClose={() => {
+          close();
+          form.reset();
+        }}
+        title="Edit Profile"
+      >
+        <EditProfileForm form={form} onSubmit={onSubmit} isSubmitting={isLoading} />
       </Modal>
 
       <Layout>
