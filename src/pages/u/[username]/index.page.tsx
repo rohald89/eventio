@@ -1,4 +1,5 @@
 import Layout from "@/core/layouts/Layout";
+import requestVerificationEmail from "@/features/auth/mutations/requestVerificationEmail";
 import EditProfileForm from "@/features/users/forms/EditProfileForm";
 import { useCurrentUser } from "@/features/users/hooks/useCurrentUser";
 import updateProfile from "@/features/users/mutations/updateProfile";
@@ -10,7 +11,7 @@ import { useMutation, useQuery } from "@blitzjs/rpc";
 import { Alert, Button, Modal, Text } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
-import { showNotification } from "@mantine/notifications";
+import { notifications, showNotification } from "@mantine/notifications";
 import { IconAlertCircle } from "@tabler/icons-react";
 import { Vertical } from "mantine-layout-components";
 import { useRouter } from "next/router";
@@ -30,7 +31,8 @@ export const ProfilePage: BlitzPage = () => {
   );
 
   const [$updateProfile, { isLoading }] = useMutation(updateProfile);
-
+  const [$requestVerificationEmail, { isLoading: isSendingEmail }] =
+    useMutation(requestVerificationEmail);
   const form = useForm<UpdateProfileFormType>({
     initialValues: {
       name: user?.name || "",
@@ -83,7 +85,20 @@ export const ProfilePage: BlitzPage = () => {
                 <Text>
                   Your email is not yet verified. Please check your inbox for the welcome email.
                 </Text>
-                <Button size="xs" color="red" variant="light">
+                <Button
+                  size="xs"
+                  color="red"
+                  variant="light"
+                  loading={isSendingEmail}
+                  onClick={async () => {
+                    await $requestVerificationEmail();
+                    notifications.show({
+                      color: "green",
+                      title: "Email sent",
+                      message: "Verification email has been sent",
+                    });
+                  }}
+                >
                   Resend email
                 </Button>
               </Vertical>

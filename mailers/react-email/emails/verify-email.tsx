@@ -18,18 +18,15 @@ const baseUrl = process.env.VERCEL_URL
   : "http://localhost:3000";
 
 const defaultProps = {
-  name: "Test user",
+  emailVerifyUrl: "Test user",
 };
 
-export const EmailTemplateWelcome: React.FC<{
+export const EmailTemplateVerifyEmail: React.FC<{
   props: {
-    name?: string | null;
-    emailVerifyUrl: string | null;
+    emailVerifyUrl: string;
   };
 }> = ({ props = defaultProps }) => {
-  const { name } = props;
-  const welcomeMessage = name ? `Hey there ${name}` : "Hello";
-
+  const { emailVerifyUrl } = props;
   return (
     <Html>
       <Head />
@@ -39,9 +36,12 @@ export const EmailTemplateWelcome: React.FC<{
           <Section style={box}>
             <Img src={`${baseUrl}/images/logo.png`} width="49" height="21" alt="Logo" />
             <Hr style={hr} />
-            <Text style={paragraph}>{welcomeMessage}, Thanks for signing up!</Text>
+            <Text style={paragraph}>
+              Hello, you are receiving this email because you have created an account on Eventio.
+              Please click the button below to verify your email address.
+            </Text>
 
-            <Button pX={10} pY={10} style={button} href="https://dashboard.stripe.com/login">
+            <Button pX={10} pY={10} style={button} href={emailVerifyUrl}>
               Click here to verify your account
             </Button>
             <Text style={paragraph}>— The Eventio team</Text>
@@ -54,7 +54,7 @@ export const EmailTemplateWelcome: React.FC<{
   );
 };
 
-export default EmailTemplateWelcome;
+export default EmailTemplateVerifyEmail;
 
 const main = {
   backgroundColor: "#f6f9fc",
