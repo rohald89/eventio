@@ -27,11 +27,13 @@ export const Login = z.object({
   password: z.string(),
 });
 
-export const ForgotPassword = z.object({
+export const ForgotPasswordInput = z.object({
   email,
 });
 
-export const ResetPassword = z
+export type ForgotPasswordFormType = z.infer<typeof ForgotPasswordInput>;
+
+export const ResetPasswordInput = z
   .object({
     password: password,
     passwordConfirmation: password,
@@ -41,6 +43,8 @@ export const ResetPassword = z
     message: "Passwords don't match",
     path: ["passwordConfirmation"], // set the path of the error
   });
+
+export type ResetPasswordFormType = z.infer<typeof ResetPasswordInput>;
 
 export const ChangePassword = z.object({
   currentPassword: z.string(),

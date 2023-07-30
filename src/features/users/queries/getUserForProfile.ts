@@ -7,18 +7,14 @@ const Input = z.object({
   username: z.string(),
 });
 
-export default resolver.pipe(
-  resolver.zod(Input),
-  resolver.authorize(),
-  async ({ username }, { session: { userId } }) => {
-    const user = await db.user.findFirst({
-      where: { username },
-      select: { id: true, username: true, name: true, bio: true },
-    });
+export default resolver.pipe(resolver.zod(Input), async ({ username }, { session: { userId } }) => {
+  const user = await db.user.findFirst({
+    where: { username },
+    select: { id: true, username: true, name: true, bio: true },
+  });
 
-    if (!user) {
-      throw new NotFoundError("User not found");
-    }
-    return user;
+  if (!user) {
+    throw new NotFoundError("User not found");
   }
-);
+  return user;
+});

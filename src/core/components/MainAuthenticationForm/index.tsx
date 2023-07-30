@@ -21,6 +21,8 @@ import signup from "@/features/auth/mutations/signup";
 import { Vertical } from "mantine-layout-components";
 import { Signup } from "@/features/auth/schemas";
 import { z } from "zod";
+import Link from "next/link";
+import { Routes } from "@blitzjs/next";
 
 type SignUpFormType = z.infer<typeof Signup>;
 
@@ -79,14 +81,25 @@ export function AuthenticationForm(props: PaperProps) {
               radius="md"
             />
 
-            <PasswordInput
-              required
-              label="Password"
-              placeholder="Your password"
-              {...form.getInputProps("password")}
-              radius="md"
-            />
-
+            <Vertical fullW spacing="3px">
+              <PasswordInput
+                w="100%"
+                required
+                label="Password"
+                placeholder="Your password"
+                {...form.getInputProps("password")}
+                radius="md"
+              />
+              <Text
+                fz="xs"
+                color="dimmed"
+                sx={{ alignSelf: "flex-end" }}
+                component={Link}
+                href={Routes.ForgotPasswordPage()}
+              >
+                Forgot password?
+              </Text>
+            </Vertical>
             {type === "register" && (
               <Checkbox
                 label="I accept terms and conditions"

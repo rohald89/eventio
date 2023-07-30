@@ -24,7 +24,7 @@ const defaultProps = {
 export const EmailTemplateWelcome: React.FC<{
   props: {
     name?: string | null;
-    emailVerifyUrl: string | null;
+    emailVerifyUrl?: string | null;
   };
 }> = ({ props = defaultProps }) => {
   const { name } = props;
@@ -33,7 +33,7 @@ export const EmailTemplateWelcome: React.FC<{
   return (
     <Html>
       <Head />
-      <Preview>You're now ready to make live transactions with Stripe!</Preview>
+      <Preview>Welcome at Eventio!</Preview>
       <Body style={main}>
         <Container style={container}>
           <Section style={box}>

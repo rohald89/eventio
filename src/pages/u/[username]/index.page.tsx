@@ -31,7 +31,7 @@ export const ProfilePage: BlitzPage = () => {
   );
 
   const [$updateProfile, { isLoading }] = useMutation(updateProfile);
-  const [$requestVerificationEmail, { isLoading: isSendingEmail }] =
+  const [$requestVerificationEmail, { isLoading: isSendingEmail, isSuccess }] =
     useMutation(requestVerificationEmail);
   const form = useForm<UpdateProfileFormType>({
     initialValues: {
@@ -80,27 +80,42 @@ export const ProfilePage: BlitzPage = () => {
       <Layout>
         <Vertical>
           {isOwner && !currentUser?.emailVerifiedAt && (
-            <Alert variant="outline" icon={<IconAlertCircle />} color="red" title="Warning!">
+            <Alert
+              variant="outline"
+              icon={<IconAlertCircle />}
+              color="red"
+              title={isSuccess ? "Email Sent" : "Warning!"}
+            >
               <Vertical>
-                <Text>
-                  Your email is not yet verified. Please check your inbox for the welcome email.
-                </Text>
-                <Button
-                  size="xs"
-                  color="red"
-                  variant="light"
-                  loading={isSendingEmail}
-                  onClick={async () => {
-                    await $requestVerificationEmail();
-                    notifications.show({
-                      color: "green",
-                      title: "Email sent",
-                      message: "Verification email has been sent",
-                    });
-                  }}
-                >
-                  Resend email
-                </Button>
+                {!isSuccess && (
+                  <>
+                    <Text>
+                      Your email is not yet verified. Please check your inbox for the welcome email.
+                    </Text>
+                    <Button
+                      size="xs"
+                      color="red"
+                      variant="light"
+                      loading={isSendingEmail}
+                      onClick={async () => {
+                        await $requestVerificationEmail();
+                        notifications.show({
+                          color: "green",
+                          title: "Email sent",
+                          message: "Verification email has been sent",
+                        });
+                      }}
+                    >
+                      Resend email
+                    </Button>
+                  </>
+                )}
+                {isSuccess && (
+                  <Text>
+                    The email has been send and should arrive shortly. Please be patient and check
+                    your spam folder as well.
+                  </Text>
+                )}
               </Vertical>
             </Alert>
           )}
