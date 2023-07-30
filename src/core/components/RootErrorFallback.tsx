@@ -1,6 +1,32 @@
-import { ErrorFallbackProps, ErrorComponent } from "@blitzjs/next";
+import { ErrorFallbackProps } from "@blitzjs/next";
 import { AuthenticationError, AuthorizationError } from "blitz";
 import { AuthenticationForm } from "@/core/components/MainAuthenticationForm";
+import { ReactFC } from "types";
+import { Vertical } from "mantine-layout-components";
+import { Paper, Text } from "@mantine/core";
+
+const ErrorComponent: ReactFC<{ statusCode: string | number; title: string }> = ({
+  statusCode,
+  title,
+}) => {
+  return (
+    <Vertical center fullW>
+      <Paper p={"xl"} w={"100%"} maw={400} radius={"md"}>
+        <Vertical center fullW spacing={0}>
+          <Text color={"dimmed"} fz={"md"} fw={"bold"}>
+            {statusCode}
+          </Text>
+          <Vertical spacing={0} center>
+            <Text fz={"xl"}>An error occurred 😭</Text>
+            <Text fz={"md"} color={"dimmed"}>
+              {title}
+            </Text>
+          </Vertical>
+        </Vertical>
+      </Paper>
+    </Vertical>
+  );
+};
 
 export default function RootErrorFallback({ error }: ErrorFallbackProps) {
   if (error instanceof AuthenticationError) {
