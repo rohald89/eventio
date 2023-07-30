@@ -11,7 +11,7 @@ import cleanCompleted from "@/features/todos/mutations/cleanCompleted";
 import { ReactFC } from "types";
 import { PromiseReturnType } from "blitz";
 import { useForm, zodResolver } from "@mantine/form";
-import { TodoFormType, TodoInput } from "@/features/todos/schema";
+import { TodoFormType, TodoInput } from "@/features/todos/schemas";
 
 type TodosType = PromiseReturnType<typeof getTodos>;
 type TodoType = TodosType[0];

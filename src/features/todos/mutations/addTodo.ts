@@ -1,7 +1,7 @@
 import { resolver } from "@blitzjs/rpc";
 import db from "db";
 
-import { TodoInput } from "../schema";
+import { TodoInput } from "../schemas";
 
 export default resolver.pipe(
   resolver.zod(TodoInput),
