@@ -5,40 +5,43 @@ import {
   Text,
   Paper,
   Group,
+  PaperProps,
   Button,
   Divider,
+  Checkbox,
   Anchor,
   Stack,
 } from "@mantine/core";
 import { useMutation } from "@blitzjs/rpc";
 
-import login from "@/features/auth/mutations/login";
+import signup from "@/features/auth/mutations/signup";
 import { Vertical } from "mantine-layout-components";
-import { LoginFormType, LoginInput } from "@/features/auth/schemas";
+import { SignUpFormType, SignupInput } from "@/features/auth/schemas";
 import Link from "next/link";
 import { Routes } from "@blitzjs/next";
 import SocialButtonsAuth from "./SocialButtonsAuth";
 import { ReactFC } from "types";
 
-export const LoginForm: ReactFC<{
+export const SignupForm: ReactFC<{
   toggle: () => void;
 }> = ({ toggle }) => {
-  const [$login, { isLoading }] = useMutation(login);
+  const [$signup, { isLoading }] = useMutation(signup);
 
-  const form = useForm<LoginFormType>({
-    validate: zodResolver(LoginInput),
+  const form = useForm<SignUpFormType>({
+    validate: zodResolver(SignupInput),
     validateInputOnBlur: true,
+    validateInputOnChange: ["terms"],
   });
 
-  const onSubmit = async (values: LoginFormType) => {
-    await $login(values);
+  const onSubmit = async (values: SignUpFormType) => {
+    await $signup(values);
   };
 
   return (
     <Vertical mih="100vh" center fullH fullW>
-      <Paper radius="md" p="xl" withBorder>
+      <Paper radius="md" p="xl" withBorder {...props}>
         <Text size="lg" weight={500}>
-          Welcome to Eventio, Login with
+          Welcome to Eventio, Sign Up with
         </Text>
 
         <SocialButtonsAuth />
@@ -47,6 +50,14 @@ export const LoginForm: ReactFC<{
 
         <form onSubmit={form.onSubmit(onSubmit)}>
           <Stack>
+            <TextInput
+              required
+              label="Name"
+              placeholder="Your name"
+              {...form.getInputProps("name")}
+              radius="md"
+            />
+
             <TextInput
               required
               label="Email"
@@ -74,14 +85,19 @@ export const LoginForm: ReactFC<{
                 Forgot password?
               </Text>
             </Vertical>
+
+            <Checkbox
+              label="I accept terms and conditions"
+              {...form.getInputProps("terms", { type: "checkbox" })}
+            />
           </Stack>
 
           <Group position="apart" mt="xl">
             <Anchor onClick={toggle} component="button" type="button" color="dimmed" size="xs">
-              {"Don't have an account? Register"}
+              Already have an account? Login
             </Anchor>
             <Button disabled={!form.isValid()} loading={isLoading} type="submit" radius="xl">
-              Login
+              Register
             </Button>
           </Group>
         </form>

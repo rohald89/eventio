@@ -2,13 +2,13 @@ import { SecurePassword } from "@blitzjs/auth/secure-password";
 import { resolver } from "@blitzjs/rpc";
 import db from "db";
 import { Role } from "types";
-import { Signup } from "../schemas";
+import { SignupInput } from "../schemas";
 import { PrismaError } from "@/utils/blitz";
 import { sendEmail } from "mailers/sendEmail";
 import React from "react";
 import EmailTemplateWelcome from "mailers/react-email/emails/welcome";
 
-export default resolver.pipe(resolver.zod(Signup), async ({ name, email, password }, ctx) => {
+export default resolver.pipe(resolver.zod(SignupInput), async ({ name, email, password }, ctx) => {
   const existingUser = await db.user.findFirst({
     where: { email: email.toLowerCase().trim() },
   });
@@ -34,6 +34,7 @@ export default resolver.pipe(resolver.zod(Signup), async ({ name, email, passwor
         react: React.createElement(EmailTemplateWelcome, {
           props: {
             name: user.name,
+            emailVerifyUrl: "",
           },
         }),
       });
