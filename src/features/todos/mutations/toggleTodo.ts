@@ -1,4 +1,5 @@
 import { resolver } from "@blitzjs/rpc";
+import { NotFoundError } from "blitz";
 import db from "db";
 import { z } from "zod";
 
@@ -21,10 +22,10 @@ export default resolver.pipe(
     });
 
     if (!todo) {
-      throw new Error("Todo not found");
+      throw new NotFoundError("Todo not found");
     }
 
-    return db.todo.update({
+    await db.todo.update({
       where: {
         id,
       },
@@ -32,5 +33,6 @@ export default resolver.pipe(
         done: !todo.done,
       },
     });
+    return todo;
   }
 );

@@ -3,8 +3,9 @@ import React, { Suspense } from "react";
 import { withBlitz } from "@/blitz-client";
 import RootErrorFallback from "@/core/components/RootErrorFallback";
 import "@/styles/globals.css";
-import { Loader, MantineProvider } from "@mantine/core";
+import { MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
+import FullPageLoader from "@/core/components/MainAuthenticationForm/FullPageLoader";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -17,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     >
       <ErrorBoundary FallbackComponent={RootErrorFallback}>
         <Notifications position="top-right" />
-        <Suspense fallback={<Loader />}>
+        <Suspense fallback={<FullPageLoader />}>
           <Component {...pageProps} />
         </Suspense>
       </ErrorBoundary>

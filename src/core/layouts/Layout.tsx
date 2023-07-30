@@ -106,7 +106,15 @@ const Layout: ReactFC<{
       >
         <Vertical fullW fullH>
           <ErrorBoundary resetKeys={[user]} FallbackComponent={RootErrorFallback}>
-            <Suspense fallback={<Loader />}>{children}</Suspense>
+            <Suspense
+              fallback={
+                <Vertical center fullW fullH>
+                  <Loader />
+                </Vertical>
+              }
+            >
+              {children}
+            </Suspense>
           </ErrorBoundary>
         </Vertical>
       </AppShell>

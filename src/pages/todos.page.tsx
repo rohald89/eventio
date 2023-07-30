@@ -11,6 +11,7 @@ import toggleTodo from "@/features/todos/mutations/toggleTodo";
 import cleanCompleted from "@/features/todos/mutations/cleanCompleted";
 import { ReactFC } from "types";
 import { PromiseReturnType } from "blitz";
+import { notifications } from "@mantine/notifications";
 
 type TodosType = PromiseReturnType<typeof getTodos>;
 type TodoType = TodosType[0];
@@ -53,11 +54,11 @@ const Todos = () => {
       />
       <Button
         loading={isLoading}
-        onClick={async () =>
+        onClick={async () => {
           await $addTodo({
             title,
-          })
-        }
+          });
+        }}
       >
         Create a Todo
       </Button>
@@ -74,9 +75,7 @@ const Todos = () => {
 export const TodosPage: BlitzPage = () => {
   return (
     <Layout>
-      <Suspense fallback={<Loader />}>
-        <Todos />
-      </Suspense>
+      <Todos />
     </Layout>
   );
 };
