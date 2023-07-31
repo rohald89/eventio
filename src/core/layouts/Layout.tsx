@@ -12,6 +12,7 @@ import {
   Header,
   Indicator,
   Loader,
+  Modal,
   RingProgress,
   Text,
   Tooltip,
@@ -28,6 +29,7 @@ import Conditional from "conditional-wrap";
 import { getAvatarFallback, getUploadThingUrl } from "@/utils/images";
 import UserAvatar from "../components/UserAvatar";
 import UserProfileProgress from "../components/Header/UserProfileProgress";
+import { OnboardingWizard } from "../components/OnboardingWizard";
 
 const Layout: ReactFC<{
   title?: string;
@@ -144,6 +146,19 @@ const Layout: ReactFC<{
                 </Vertical>
               }
             >
+              <Modal
+                size="xl"
+                centered={true}
+                title="Onboarding modal"
+                closeOnClickOutside={false}
+                closeOnEscape={false}
+                withCloseButton={false}
+                opened={!user?.onboarded}
+                onClose={() => {}}
+              >
+                Welcome to our app!
+                <OnboardingWizard />
+              </Modal>
               {children}
             </Suspense>
           </ErrorBoundary>
