@@ -1,10 +1,18 @@
-
-
 import Head from "next/head";
 import { Suspense } from "react";
 import { ErrorBoundary, Routes } from "@blitzjs/next";
 import { Horizontal, Vertical } from "mantine-layout-components";
-import { Anchor, AppShell, Button, Footer, Header, Loader, Text, Tooltip } from "@mantine/core";
+import {
+  Anchor,
+  AppShell,
+  Avatar,
+  Button,
+  Footer,
+  Header,
+  Loader,
+  Text,
+  Tooltip,
+} from "@mantine/core";
 import Link from "next/link";
 import logout from "@/features/auth/mutations/logout";
 import { useMutation } from "@blitzjs/rpc";
@@ -14,6 +22,8 @@ import { IconUserShield } from "@tabler/icons-react";
 import RootErrorFallback from "../components/RootErrorFallback";
 import { useRouter } from "next/router";
 import Conditional from "conditional-wrap";
+import { getAvatarFallback, getUploadThingUrl } from "@/utils/images";
+import UserAvatar from "../components/UserAvatar";
 
 const Layout: ReactFC<{
   title?: string;
@@ -64,7 +74,10 @@ const Layout: ReactFC<{
                         );
                       }}
                     >
-                      <Text>{user.name}</Text>
+                      <Horizontal>
+                        <UserAvatar user={user} />
+                        <Text>{user.name}</Text>
+                      </Horizontal>
                     </Conditional>
                     {user.isAdmin && (
                       <Tooltip label="Admin">

@@ -31,6 +31,7 @@ model User {
     hashedPassword  String?
     role            String    @default("USER")
     emailVerifiedAt DateTime?
+    avatarImageKey  String?
 
     username String? @unique
     bio      String?

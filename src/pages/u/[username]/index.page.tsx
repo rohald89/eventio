@@ -45,6 +45,7 @@ export const ProfilePage: BlitzPage = () => {
   });
 
   const onSubmit = async (values: UpdateProfileFormType) => {
+    console.log(values);
     await $updateProfile(values);
     const { username } = values;
     if (username !== user?.username) {
@@ -123,27 +124,6 @@ export const ProfilePage: BlitzPage = () => {
           {isOwner && <Button onClick={open}>Edit Profile</Button>}
           <Text>Hello {username}</Text>
           <Text>{user.bio}</Text>
-          <UploadButton
-            endpoint="imageUploader"
-            onClientUploadComplete={(res) => {
-              // Do something with the response
-              console.log("Files: ", res);
-              notifications.show({
-                color: "green",
-                title: "Files uploaded",
-                message: "Files have been uploaded",
-              });
-            }}
-            onUploadError={(error: Error) => {
-              // Do something with the error.
-              console.log("Error: ", error);
-              notifications.show({
-                color: "red",
-                title: "Error",
-                message: error.message,
-              });
-            }}
-          />
         </Vertical>
       </Layout>
     </>
