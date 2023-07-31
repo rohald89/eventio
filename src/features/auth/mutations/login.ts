@@ -6,6 +6,7 @@ import { LoginInput } from "../schemas";
 export default resolver.pipe(resolver.zod(LoginInput), async (params, ctx) => {
   const { email, password } = params;
   const user = await authenticateUser(email, password);
+  console.log("USER WHILE LOGGING IN: ", user);
   await ctx.session.$create({ userId: user.id, role: user.role as Role });
 
   return user;

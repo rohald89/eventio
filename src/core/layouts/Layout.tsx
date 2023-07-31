@@ -1,5 +1,7 @@
+
+
 import Head from "next/head";
-import { ReactNode, Suspense } from "react";
+import { Suspense } from "react";
 import { ErrorBoundary, Routes } from "@blitzjs/next";
 import { Horizontal, Vertical } from "mantine-layout-components";
 import { Anchor, AppShell, Button, Footer, Header, Loader, Text, Tooltip } from "@mantine/core";
@@ -13,11 +15,6 @@ import RootErrorFallback from "../components/RootErrorFallback";
 import { useRouter } from "next/router";
 import Conditional from "conditional-wrap";
 
-type Props = {
-  title?: string;
-  children?: ReactNode;
-  maxWidth?: number;
-};
 const Layout: ReactFC<{
   title?: string;
   maxWidth?: number;
