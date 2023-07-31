@@ -1,7 +1,6 @@
 export const getAvatarFallback = (name?: string | null) => {
   if (!name) return "";
   const [first, second] = name.split(" ");
-  console.log(first, second);
   return `${first?.[0]}${second ? second[0] : ""}`;
 };
 

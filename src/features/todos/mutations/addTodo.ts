@@ -18,7 +18,6 @@ export default resolver.pipe(
       },
     });
 
-    console.log(`Creating a todo with the title: ${title}`);
     return todo;
   }
 );

@@ -6,10 +6,13 @@ import {
   Anchor,
   AppShell,
   Avatar,
+  Box,
   Button,
   Footer,
   Header,
+  Indicator,
   Loader,
+  RingProgress,
   Text,
   Tooltip,
 } from "@mantine/core";
@@ -24,6 +27,7 @@ import { useRouter } from "next/router";
 import Conditional from "conditional-wrap";
 import { getAvatarFallback, getUploadThingUrl } from "@/utils/images";
 import UserAvatar from "../components/UserAvatar";
+import UserProfileProgress from "../components/Header/UserProfileProgress";
 
 const Layout: ReactFC<{
   title?: string;
@@ -75,15 +79,30 @@ const Layout: ReactFC<{
                       }}
                     >
                       <Horizontal>
-                        <UserAvatar user={user} />
+                        <Conditional
+                          condition={user.isAdmin}
+                          wrap={(children) => (
+                            <Indicator
+                              position="bottom-end"
+                              color="none"
+                              label={
+                                <Tooltip color="dark" label="Admin">
+                                  <Box>
+                                    <IconUserShield size={15} />
+                                  </Box>
+                                </Tooltip>
+                              }
+                            >
+                              {children}
+                            </Indicator>
+                          )}
+                        >
+                          <UserAvatar user={user} />
+                        </Conditional>
                         <Text>{user.name}</Text>
+                        <UserProfileProgress />
                       </Horizontal>
                     </Conditional>
-                    {user.isAdmin && (
-                      <Tooltip label="Admin">
-                        <IconUserShield size={15} />
-                      </Tooltip>
-                    )}
                   </Horizontal>
                   <Button
                     size="xs"

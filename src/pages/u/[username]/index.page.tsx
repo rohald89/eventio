@@ -47,7 +47,6 @@ export const ProfilePage: BlitzPage = () => {
   });
 
   const onSubmit = async (values: UpdateProfileFormType) => {
-    console.log(values);
     await $updateProfile(values);
     const { username } = values;
     if (username !== user?.username) {

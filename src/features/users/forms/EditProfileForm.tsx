@@ -24,7 +24,6 @@ export const EditProfileForm: ReactFC<{
         />
         <TextInput
           w="100%"
-          required
           label="Username"
           placeholder="Your username"
           {...form.getInputProps("username")}
@@ -32,7 +31,6 @@ export const EditProfileForm: ReactFC<{
         />
         <Textarea
           w="100%"
-          required
           label="Bio"
           placeholder="Your Bio"
           {...form.getInputProps("bio")}

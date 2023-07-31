@@ -14,14 +14,14 @@ export const EditProfilePage: BlitzPage = () => {
   const router = useRouter();
   const [$updateProfile, { isLoading }] = useMutation(updateProfile);
 
-  const [data] = useQuery(getUserForEditProfile, {});
+  const [user] = useQuery(getUserForEditProfile, {});
   const form = useForm<UpdateProfileFormType>({
     initialValues: {
-      name: data?.name || "",
-      username: data?.username || "",
-      bio: data?.bio || "",
-      avatarImageKey: data?.avatarImageKey || "",
-      coverImageKey: data?.coverImageKey || "",
+      name: user?.name || "",
+      username: user?.username || "",
+      bio: user?.bio || "",
+      avatarImageKey: user?.avatarImageKey || "",
+      coverImageKey: user?.coverImageKey || "",
     },
     validate: zodResolver(UpdateProfileInput),
     validateInputOnBlur: true,

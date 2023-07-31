@@ -87,7 +87,6 @@ const UploadThingFileInput: ReactFC<{
         <FileInput
           disabled={loading.value}
           onChange={async (files) => {
-            console.log(files);
             loading.setTrue();
             if (files) {
               await startUpload([files]);
