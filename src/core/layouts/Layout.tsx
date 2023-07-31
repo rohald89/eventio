@@ -6,6 +6,7 @@ import {
   Anchor,
   AppShell,
   Avatar,
+  Badge,
   Box,
   Button,
   Footer,
@@ -102,6 +103,7 @@ const Layout: ReactFC<{
                           <UserAvatar user={user} />
                         </Conditional>
                         <Text>{user.name}</Text>
+                        <Badge color="red">Pro</Badge>
                         <UserProfileProgress />
                       </Horizontal>
                     </Conditional>
@@ -146,19 +148,21 @@ const Layout: ReactFC<{
                 </Vertical>
               }
             >
-              <Modal
-                size="xl"
-                centered={true}
-                title="Onboarding modal"
-                closeOnClickOutside={false}
-                closeOnEscape={false}
-                withCloseButton={false}
-                opened={!user?.onboarded}
-                onClose={() => {}}
-              >
-                Welcome to our app!
-                <OnboardingWizard />
-              </Modal>
+              {user && (
+                <Modal
+                  size="xl"
+                  centered={true}
+                  title="Onboarding modal"
+                  closeOnClickOutside={false}
+                  closeOnEscape={false}
+                  withCloseButton={false}
+                  opened={!user?.onboarded}
+                  onClose={() => {}}
+                >
+                  Welcome to our app!
+                  <OnboardingWizard />
+                </Modal>
+              )}
               {children}
             </Suspense>
           </ErrorBoundary>
