@@ -10,7 +10,14 @@ const Input = z.object({
 export default resolver.pipe(resolver.zod(Input), async ({ username }, { session: { userId } }) => {
   const user = await db.user.findFirst({
     where: { username },
-    select: { id: true, username: true, name: true, bio: true },
+    select: {
+      id: true,
+      username: true,
+      name: true,
+      bio: true,
+      avatarImageKey: true,
+      coverImageKey: true,
+    },
   });
 
   if (!user) {

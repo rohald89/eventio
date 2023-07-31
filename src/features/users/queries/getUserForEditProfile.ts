@@ -13,7 +13,14 @@ export default resolver.pipe(
       where: {
         id: userId,
       },
-      select: { id: true, username: true, name: true, bio: true },
+      select: {
+        id: true,
+        username: true,
+        name: true,
+        bio: true,
+        avatarImageKey: true,
+        coverImageKey: true,
+      },
     });
 
     if (!user) {

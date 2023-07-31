@@ -1,4 +1,3 @@
-import { UploadButton } from "@/core/components/UploadThing";
 import Layout from "@/core/layouts/Layout";
 import requestVerificationEmail from "@/features/auth/mutations/requestVerificationEmail";
 import EditProfileForm from "@/features/users/forms/EditProfileForm";
@@ -6,10 +5,11 @@ import { useCurrentUser } from "@/features/users/hooks/useCurrentUser";
 import updateProfile from "@/features/users/mutations/updateProfile";
 import getUserForProfile from "@/features/users/queries/getUserForProfile";
 import { UpdateProfileFormType, UpdateProfileInput } from "@/features/users/schemas";
+import { getUploadThingUrl } from "@/utils/images";
 import { useStringParam } from "@/utils/utils";
 import { BlitzPage, Routes } from "@blitzjs/next";
 import { useMutation, useQuery } from "@blitzjs/rpc";
-import { Alert, Button, Modal, Text } from "@mantine/core";
+import { Alert, Button, Image, Modal, Text } from "@mantine/core";
 import { useForm, zodResolver } from "@mantine/form";
 import { useDisclosure } from "@mantine/hooks";
 import { notifications, showNotification } from "@mantine/notifications";
@@ -39,6 +39,8 @@ export const ProfilePage: BlitzPage = () => {
       name: user?.name || "",
       username: user?.username || "",
       bio: user?.bio || "",
+      avatarImageKey: user?.avatarImageKey || "",
+      coverImageKey: user?.coverImageKey || "",
     },
     validate: zodResolver(UpdateProfileInput),
     validateInputOnBlur: true,
@@ -122,6 +124,7 @@ export const ProfilePage: BlitzPage = () => {
             </Alert>
           )}
           {isOwner && <Button onClick={open}>Edit Profile</Button>}
+          <Image src={getUploadThingUrl(user.coverImageKey)} width={300} alt="cover image" />
           <Text>Hello {username}</Text>
           <Text>{user.bio}</Text>
         </Vertical>
