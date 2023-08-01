@@ -3,15 +3,7 @@ import { Button } from "@mantine/core";
 import { Horizontal, Vertical } from "mantine-layout-components";
 import { ReactFC } from "types";
 
-type InnerProps = {};
-
-export const ReportBugModalComponent: ReactFC<ContextModalProps<InnerProps>> = ({
-  context,
-  id,
-  innerProps,
-}) => {
-  const {} = innerProps;
-
+export const ReportBugModalComponent: ReactFC<ContextModalProps> = ({ context, id }) => {
   let closeModal = () => context.closeModal(id);
 
   return (

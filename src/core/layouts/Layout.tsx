@@ -2,44 +2,26 @@ import Head from "next/head";
 import { Suspense } from "react";
 import { ErrorBoundary, Routes } from "@blitzjs/next";
 import { Horizontal, Vertical } from "mantine-layout-components";
-import {
-  Anchor,
-  AppShell,
-  Avatar,
-  Badge,
-  Box,
-  Button,
-  Footer,
-  Header,
-  Indicator,
-  Loader,
-  Modal,
-  RingProgress,
-  Text,
-  Tooltip,
-} from "@mantine/core";
+import { Anchor, AppShell, Badge, Footer, Header, Loader, Modal, Text } from "@mantine/core";
 import Link from "next/link";
 import logout from "@/features/auth/mutations/logout";
 import { useMutation } from "@blitzjs/rpc";
 import { useCurrentUser } from "@/features/users/hooks/useCurrentUser";
 import type { ReactFC } from "types";
-import { IconUserShield } from "@tabler/icons-react";
 import RootErrorFallback from "../components/RootErrorFallback";
 import { useRouter } from "next/router";
-import Conditional from "conditional-wrap";
-import { getAvatarFallback, getUploadThingUrl } from "@/utils/images";
-import UserAvatar from "../components/UserAvatar";
 import UserProfileProgress from "../components/Header/UserProfileProgress";
 import { OnboardingWizard } from "../components/OnboardingWizard";
 import { openContextModal } from "@mantine/modals";
 import { GlobalModal } from "@/modals";
+import UserHeaderMenu from "../components/Header/UserHeaderMenu";
 
 const Layout: ReactFC<{
   title?: string;
   maxWidth?: number;
 }> = ({ title, maxWidth = 800, children }) => {
   const thisYear = new Date().getFullYear();
-  const [logoutMutation] = useMutation(logout);
+  const [$logout] = useMutation(logout);
 
   const user = useCurrentUser();
   const router = useRouter();
@@ -73,40 +55,9 @@ const Layout: ReactFC<{
               {user && (
                 <Horizontal center>
                   <Horizontal center spacing="xs">
-                    <Conditional
-                      condition={!!user.username}
-                      wrap={(children) => {
-                        return (
-                          <Link href={Routes.ProfilePage({ username: user.username as string })}>
-                            {children}
-                          </Link>
-                        );
-                      }}
-                    >
-                      <Horizontal>
-                        <Conditional
-                          condition={user.isAdmin}
-                          wrap={(children) => (
-                            <Indicator
-                              position="bottom-end"
-                              color="none"
-                              label={
-                                <Tooltip color="dark" label="Admin">
-                                  <Box>
-                                    <IconUserShield size={15} />
-                                  </Box>
-                                </Tooltip>
-                              }
-                            >
-                              {children}
-                            </Indicator>
-                          )}
-                        >
-                          <UserAvatar user={user} />
-                        </Conditional>
-                        <Text>{user.name}</Text>
-                      </Horizontal>
-                    </Conditional>
+                    <Horizontal>
+                      <UserHeaderMenu />
+                    </Horizontal>
                     <Badge
                       color="red"
                       onClick={() => {
@@ -123,16 +74,19 @@ const Layout: ReactFC<{
                     </Badge>
                     <UserProfileProgress />
                   </Horizontal>
+
+                  {/* <DarkLightSwitch />
+
                   <Button
                     size="xs"
                     variant="light"
                     onClick={async () => {
-                      await logoutMutation();
+                      await $logout();
                       await router.push("/");
                     }}
                   >
                     Logout
-                  </Button>
+                  </Button> */}
                 </Horizontal>
               )}
             </Horizontal>
