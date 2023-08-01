@@ -23,6 +23,7 @@ export default resolver.pipe(resolver.zod(SignupInput), async ({ name, email, pa
         email: email.toLowerCase().trim(),
         hashedPassword,
         role: "USER",
+        onboarded: false,
       },
       select: { id: true, name: true, email: true, role: true },
     });

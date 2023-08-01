@@ -1,15 +1,16 @@
 import Layout from "@/core/layouts/Layout";
 import { BlitzPage } from "@blitzjs/next";
-import { Tabs, Title } from "@mantine/core";
+import { Tabs } from "@mantine/core";
 import { IconMail, IconSettings, IconUserCog } from "@tabler/icons-react";
 import { Vertical } from "mantine-layout-components";
 import ChangePassword from "./components/ChangePassword";
+import UserEmailSettings from "./components/UserEmailSettings";
 
 export const SettingsPage: BlitzPage = () => {
   return (
     <Layout>
       <Vertical fullW>
-        <Tabs w="100%" orientation="vertical" defaultValue="account">
+        <Tabs w="100%" orientation="vertical" defaultValue="email">
           <Tabs.List>
             <Tabs.Tab value="account" icon={<IconUserCog size="0.8rem" />}>
               Account
@@ -26,7 +27,7 @@ export const SettingsPage: BlitzPage = () => {
             <ChangePassword />
           </Tabs.Panel>
           <Tabs.Panel value="email" pl="xs">
-            Email tab content
+            <UserEmailSettings />
           </Tabs.Panel>
 
           <Tabs.Panel value="settings" pl="xs">
