@@ -50,7 +50,20 @@ export const ResetPasswordInput = z
 
 export type ResetPasswordFormType = z.infer<typeof ResetPasswordInput>;
 
-export const ChangePassword = z.object({
-  currentPassword: z.string(),
-  newPassword: password,
-});
+// export const ChangePassword = z.object({
+//   currentPassword: z.string(),
+//   newPassword: password,
+// });
+
+export const ChangePasswordInput = z
+  .object({
+    currentPassword: password,
+    newPassword: password,
+    newPasswordConfirmation: password,
+  })
+  .refine((data) => data.newPassword === data.newPasswordConfirmation, {
+    message: "Passwords don't match",
+    path: ["newPasswordConfirmation"], // set the path of the error
+  });
+
+export type ChangePasswordFormType = z.infer<typeof ChangePasswordInput>;

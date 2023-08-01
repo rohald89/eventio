@@ -1,6 +1,7 @@
 import { Box, Button, Indicator, Menu, Text, Tooltip } from "@mantine/core";
 import {
   IconArrowsLeftRight,
+  IconLogout,
   IconMessageCircle,
   IconPencil,
   IconPhoto,
@@ -16,9 +17,15 @@ import UserAvatar from "../UserAvatar";
 import { useCurrentUser } from "@/features/users/hooks/useCurrentUser";
 import { MenuItemIcon, MenuItemLink } from "../MenuItems";
 import { Routes } from "@blitzjs/next";
+import { useMutation } from "@blitzjs/rpc";
+import logout from "@/features/auth/mutations/logout";
+import { useRouter } from "next/router";
 
 const UserHeaderMenu = () => {
   const user = useCurrentUser();
+  const [$logout] = useMutation(logout);
+
+  const router = useRouter();
 
   if (!user) return null;
   return (
@@ -66,7 +73,6 @@ const UserHeaderMenu = () => {
             Go to Profile
           </MenuItemLink>
         )}
-
         <Menu.Item
           icon={<IconSearch size={14} />}
           rightSection={
@@ -77,14 +83,24 @@ const UserHeaderMenu = () => {
         >
           Search
         </Menu.Item>
-
         <Menu.Divider />
 
-        <Menu.Label>Danger zone</Menu.Label>
+        <MenuItemIcon
+          color="red.4"
+          Icon={IconLogout}
+          onClick={async () => {
+            await $logout();
+            await router.push("/");
+          }}
+        >
+          Logout
+        </MenuItemIcon>
+
+        {/* <Menu.Label>Danger zone</Menu.Label>
         <Menu.Item icon={<IconArrowsLeftRight size={14} />}>Transfer my data</Menu.Item>
         <Menu.Item color="red" icon={<IconTrash size={14} />}>
           Delete my account
-        </Menu.Item>
+        </Menu.Item> */}
       </Menu.Dropdown>
     </Menu>
   );

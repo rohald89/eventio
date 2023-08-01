@@ -75,18 +75,7 @@ const Layout: ReactFC<{
                     <UserProfileProgress />
                   </Horizontal>
 
-                  {/* <DarkLightSwitch />
-
-                  <Button
-                    size="xs"
-                    variant="light"
-                    onClick={async () => {
-                      await $logout();
-                      await router.push("/");
-                    }}
-                  >
-                    Logout
-                  </Button> */}
+                  {/* <DarkLightSwitch /> */}
                 </Horizontal>
               )}
             </Horizontal>
@@ -117,21 +106,19 @@ const Layout: ReactFC<{
                 </Vertical>
               }
             >
-              {user && (
-                <Modal
-                  size="xl"
-                  centered={true}
-                  title="Onboarding modal"
-                  closeOnClickOutside={false}
-                  closeOnEscape={false}
-                  withCloseButton={false}
-                  opened={!user?.onboarded}
-                  onClose={() => {}}
-                >
-                  Welcome to our app!
-                  <OnboardingWizard />
-                </Modal>
-              )}
+              <Modal
+                size="xl"
+                centered={true}
+                title="Onboarding modal"
+                closeOnClickOutside={false}
+                closeOnEscape={false}
+                withCloseButton={false}
+                opened={!!user && !user?.onboarded}
+                onClose={() => {}}
+              >
+                Welcome to our app!
+                <OnboardingWizard />
+              </Modal>
               {children}
             </Suspense>
           </ErrorBoundary>
