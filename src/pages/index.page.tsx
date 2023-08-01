@@ -2,9 +2,9 @@ import Layout from "@/core/layouts/Layout";
 import { BlitzPage } from "@blitzjs/next";
 import { AuthenticationForm } from "@/core/components/MainAuthenticationForm";
 import { useCurrentUser } from "@/features/users/hooks/useCurrentUser";
-import { modals, openContextModal } from "@mantine/modals";
+import { openContextModal } from "@mantine/modals";
 import { GlobalModal } from "@/modals";
-import { Button, Text } from "@mantine/core";
+import { Button } from "@mantine/core";
 import { confirmDelete } from "@/utils/mantine";
 
 const Home: BlitzPage = () => {
