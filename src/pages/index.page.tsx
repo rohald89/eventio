@@ -6,6 +6,8 @@ import { openContextModal } from "@mantine/modals";
 import { GlobalModal } from "@/modals";
 import { Button } from "@mantine/core";
 import { confirmDelete } from "@/utils/mantine";
+import { useMutation } from "@blitzjs/rpc";
+import sendDummyEmail from "@/features/users/mutations/sendDummyEmail";
 
 const Home: BlitzPage = () => {
   const user = useCurrentUser();
@@ -13,6 +15,8 @@ const Home: BlitzPage = () => {
   const deleteAccountMutation = () => {
     console.log("deleting account");
   };
+
+  const [$sendEmail] = useMutation(sendDummyEmail);
 
   return (
     <Layout title="Home">
@@ -61,6 +65,15 @@ const Home: BlitzPage = () => {
         }}
       >
         Delete Account
+      </Button>
+
+      <Button
+        onClick={async () => {
+          await $sendEmail({});
+        }}
+        color="blue.4"
+      >
+        Send dummy email
       </Button>
     </Layout>
   );

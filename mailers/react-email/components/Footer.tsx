@@ -1,13 +1,19 @@
-import { Hr, Text } from "@react-email/components";
+import { Hr, Link, Text } from "@react-email/components";
 import { emailStyles } from "../../styles";
 import React from "react";
 
-const Footer = () => {
+const Footer = ({ unsubscribeLink }: { unsubscribeLink?: string }) => {
   return (
     <>
       <Text style={emailStyles.paragraph}>— The Eventio team</Text>
-      <Hr style={emailStyles.hr} />
-      <Text style={footer}>Eventio, 1234 Chuckle Street, GiggleTown, LOL 98765</Text>
+      {unsubscribeLink && (
+        <>
+          <Hr style={emailStyles.hr} />
+          <Text style={footer}>
+            <Link href={unsubscribeLink}>Unsubscribe</Link>
+          </Text>
+        </>
+      )}
     </>
   );
 };
@@ -18,4 +24,5 @@ const footer = {
   color: "#8898aa",
   fontSize: "12px",
   lineHeight: "16px",
+  textAlign: "center" as any,
 };
