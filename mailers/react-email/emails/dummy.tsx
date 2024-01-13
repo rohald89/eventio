@@ -22,7 +22,6 @@ export const EmailTemplateDummy: React.FC<{
   };
 }> = ({ props = defaultProps }) => {
   const { name } = props;
-  const welcomeMessage = name ? `Hey there ${name}` : "Hello";
 
   return (
     <Html>

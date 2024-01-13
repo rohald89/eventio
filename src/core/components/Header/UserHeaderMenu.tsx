@@ -1,13 +1,10 @@
-import { Box, Button, Indicator, Menu, Text, Tooltip } from "@mantine/core";
+import { Box, Indicator, Menu, Text, Tooltip } from "@mantine/core";
 import {
-  IconArrowsLeftRight,
   IconLogout,
-  IconMessageCircle,
   IconPencil,
-  IconPhoto,
   IconSearch,
   IconSettings,
-  IconTrash,
+  IconTools,
   IconUser,
   IconUserShield,
 } from "@tabler/icons-react";
@@ -63,6 +60,7 @@ const UserHeaderMenu = () => {
         <MenuItemLink Icon={IconPencil} href={Routes.EditProfilePage()}>
           Edit profile
         </MenuItemLink>
+
         {user.username && (
           <MenuItemLink
             Icon={IconUser}
@@ -83,6 +81,12 @@ const UserHeaderMenu = () => {
         >
           Search
         </Menu.Item>
+        <Menu.Divider />
+
+        { user.isAdmin && <MenuItemLink Icon={IconUserShield} href={Routes.AdminPage()}>
+          Admin
+        </MenuItemLink> }
+
         <Menu.Divider />
 
         <MenuItemIcon
