@@ -7,7 +7,7 @@ import { GlobalModal } from "@/modals";
 import { Button } from "@mantine/core";
 import { confirmDelete } from "@/utils/mantine";
 import { useMutation } from "@blitzjs/rpc";
-import sendDummyEmail from "@/features/users/mutations/sendDummyEmail";
+import sendDummyEmail from "@/features/email/mutations/sendDummyEmail";
 
 const Home: BlitzPage = () => {
   const user = useCurrentUser();

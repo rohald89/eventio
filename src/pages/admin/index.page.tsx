@@ -3,6 +3,7 @@ import { BlitzPage } from "@blitzjs/next";
 import { Tabs } from "@mantine/core";
 import { IconUserCog } from "@tabler/icons-react";
 import { Vertical } from "mantine-layout-components";
+import { AdminPageEmailTab } from "@/pages/admin/components/AdminPageEmailTab";
 
 export const AdminPage: BlitzPage = () => {
   return (
@@ -16,7 +17,7 @@ export const AdminPage: BlitzPage = () => {
           </Tabs.List>
 
           <Tabs.Panel value="email" pl="xs">
-            Sent Bulk Email
+            <AdminPageEmailTab />
           </Tabs.Panel>
         </Tabs>
       </Vertical>
@@ -24,4 +25,5 @@ export const AdminPage: BlitzPage = () => {
   );
 };
 
+AdminPage.authenticate = true;
 export default AdminPage;

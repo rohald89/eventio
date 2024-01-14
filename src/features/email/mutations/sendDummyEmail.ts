@@ -1,7 +1,7 @@
 import { resolver } from "@blitzjs/rpc";
-import db from "db";
-import EmailTemplateDummy from "mailers/react-email/emails/dummy";
-import { sendEmail } from "mailers/sendEmail";
+import db from "../../../../db";
+import EmailTemplateDummy from "../../../../mailers/react-email/emails/dummy";
+import { sendEmail } from "../../../../mailers/sendEmail";
 import { z } from "zod";
 import React from "react";
 import { generateUnsubscribeLink } from "@/utils/email";
