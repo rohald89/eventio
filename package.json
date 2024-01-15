@@ -57,7 +57,7 @@
     "react-dropzone": "^14.2.3",
     "react-hanger": "^2.4.5",
     "react-hook-form": "7.45.2",
-    "resend": "^0.17.2",
+    "resend": "^2.1.0",
     "secure-password": "4.0.0",
     "uploadthing": "^5.2.1",
     "zod": "3.20.2",

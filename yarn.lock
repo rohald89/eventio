@@ -2341,15 +2341,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-email/render@npm:0.0.7":
-  version: 0.0.7
-  resolution: "@react-email/render@npm:0.0.7"
+"@react-email/render@npm:0.0.9":
+  version: 0.0.9
+  resolution: "@react-email/render@npm:0.0.9"
   dependencies:
-    html-to-text: "npm:9.0.3"
+    html-to-text: "npm:9.0.5"
     pretty: "npm:2.0.0"
     react: "npm:18.2.0"
     react-dom: "npm:18.2.0"
-  checksum: 12c1767995e0994cfeb8e81b17ea6a326db25d3bb290297d2889cde0b37de02384ad1fb36f9902ac9a147b8ff0a4cb1134b0c2aa17b59ec154441b553d4e09c1
+  checksum: 128b3a7c65e77a14600e48fb24183e182de82b4ddc8ff11bb239c421fa68bd6eb8b063822b5abe9f8599e34ece315cdb961b4133c59285cebcc517d2ec0ae8da
   languageName: node
   linkType: hard
 
@@ -2357,16 +2357,6 @@ __metadata:
   version: 1.3.2
   resolution: "@rushstack/eslint-patch@npm:1.3.2"
   checksum: 0a81d5f950fbfbe1d448a519821bcaf51524b8a1398f996f4fe8752a849cc83402f707a4cf5c35491d74eabbb19c2d53db7c870cfbb47aca5f081241b4a0681a
-  languageName: node
-  linkType: hard
-
-"@selderee/plugin-htmlparser2@npm:^0.10.0":
-  version: 0.10.0
-  resolution: "@selderee/plugin-htmlparser2@npm:0.10.0"
-  dependencies:
-    domhandler: "npm:^5.0.3"
-    selderee: "npm:^0.10.0"
-  checksum: 361596e51f4593cb74c6eb482401577f00d75f2d5297f1b0b7606de7360b52703ec1e0006f7c32aeb12a8e35ba0bc38e6bc1cef48c2419d9ca01e6f4fa9ea6f1
   languageName: node
   linkType: hard
 
@@ -3680,17 +3670,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"axios@npm:1.4.0":
-  version: 1.4.0
-  resolution: "axios@npm:1.4.0"
-  dependencies:
-    follow-redirects: "npm:^1.15.0"
-    form-data: "npm:^4.0.0"
-    proxy-from-env: "npm:^1.1.0"
-  checksum: a925a07590b0ec1d4daf28cd27890f930daab980371558deb3b883af174b881da09e5ba2cb8393a648fda5859e39934982d0b8b092fe89fc84cb6c80a70a1910
-  languageName: node
-  linkType: hard
-
 "axobject-query@npm:^3.1.1":
   version: 3.2.1
   resolution: "axobject-query@npm:3.2.1"
@@ -4767,7 +4746,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"deepmerge@npm:^4.2.2, deepmerge@npm:^4.3.1":
+"deepmerge@npm:^4.3.1":
   version: 4.3.1
   resolution: "deepmerge@npm:4.3.1"
   checksum: e53481aaf1aa2c4082b5342be6b6d8ad9dfe387bc92ce197a66dea08bd4265904a087e75e464f14d1347cf2ac8afe1e4c16b266e0561cc5df29382d3c5f80044
@@ -5932,7 +5911,7 @@ __metadata:
     react-dropzone: "npm:^14.2.3"
     react-hanger: "npm:^2.4.5"
     react-hook-form: "npm:7.45.2"
-    resend: "npm:^0.17.2"
+    resend: "npm:^2.1.0"
     secure-password: "npm:4.0.0"
     typescript: "npm:^4.8.4"
     uploadthing: "npm:^5.2.1"
@@ -6292,16 +6271,6 @@ __metadata:
   version: 0.213.1
   resolution: "flow-parser@npm:0.213.1"
   checksum: 26ffdc4b08dbbbdb71d023ef327e133e2b3ba8d2efb60a19dcaf2598fbb4977c203dda216c1279de3b4a06037413be0ae518a805cbddcc1bf9e4873efcedb9fb
-  languageName: node
-  linkType: hard
-
-"follow-redirects@npm:^1.15.0":
-  version: 1.15.2
-  resolution: "follow-redirects@npm:1.15.2"
-  peerDependenciesMeta:
-    debug:
-      optional: true
-  checksum: da5932b70e63944d38eecaa16954bac4347036f08303c913d166eda74809d8797d38386e3a0eb1d2fe37d2aaff2764cce8e9dbd99459d860cf2cdfa237923b5f
   languageName: node
   linkType: hard
 
@@ -6943,19 +6912,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-to-text@npm:9.0.3":
-  version: 9.0.3
-  resolution: "html-to-text@npm:9.0.3"
-  dependencies:
-    "@selderee/plugin-htmlparser2": "npm:^0.10.0"
-    deepmerge: "npm:^4.2.2"
-    dom-serializer: "npm:^2.0.0"
-    htmlparser2: "npm:^8.0.1"
-    selderee: "npm:^0.10.0"
-  checksum: 524a97f545efc67f8aa606ad92947e3984a3498f6ba7f42a7932aae89a1fb7fa35036d569b7561d8b7ceb962888a5b7e190d7f50ac04ba01e9189f35d728b926
-  languageName: node
-  linkType: hard
-
 "html-to-text@npm:9.0.5":
   version: 9.0.5
   resolution: "html-to-text@npm:9.0.5"
@@ -6996,7 +6952,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"htmlparser2@npm:^8.0.1, htmlparser2@npm:^8.0.2":
+"htmlparser2@npm:^8.0.2":
   version: 8.0.2
   resolution: "htmlparser2@npm:8.0.2"
   dependencies:
@@ -9519,16 +9475,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parseley@npm:^0.11.0":
-  version: 0.11.0
-  resolution: "parseley@npm:0.11.0"
-  dependencies:
-    leac: "npm:^0.6.0"
-    peberminta: "npm:^0.8.0"
-  checksum: ec25f79cf6ca7721feb1803f84a7ee152c7ddcde00baefc188093e41b3639b756915527c490b12128cece970e361d31c9027436c1052115e67c4da79e9031446
-  languageName: node
-  linkType: hard
-
 "parseley@npm:^0.12.0":
   version: 0.12.1
   resolution: "parseley@npm:0.12.1"
@@ -9651,13 +9597,6 @@ __metadata:
   version: 0.0.1
   resolution: "pause@npm:0.0.1"
   checksum: f362655dfa7f44b946302c5a033148852ed5d05f744bd848b1c7eae6a543f743e79c7751ee896ba519fd802affdf239a358bb2ea5ca1b1c1e4e916279f83ab75
-  languageName: node
-  linkType: hard
-
-"peberminta@npm:^0.8.0":
-  version: 0.8.0
-  resolution: "peberminta@npm:0.8.0"
-  checksum: 12e650795c39bc916324005bc9acca954471182492146cdf10dddc6da08229de287e1375201a2f2b53d5a5383be706aad29056470c6b099696b2c4867d673b03
   languageName: node
   linkType: hard
 
@@ -9923,13 +9862,6 @@ __metadata:
   version: 1.2.4
   resolution: "proto-list@npm:1.2.4"
   checksum: b9179f99394ec8a68b8afc817690185f3b03933f7b46ce2e22c1930dc84b60d09f5ad222beab4e59e58c6c039c7f7fcf620397235ef441a356f31f9744010e12
-  languageName: node
-  linkType: hard
-
-"proxy-from-env@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "proxy-from-env@npm:1.1.0"
-  checksum: fe7dd8b1bdbbbea18d1459107729c3e4a2243ca870d26d34c2c1bcd3e4425b7bcc5112362df2d93cc7fb9746f6142b5e272fd1cc5c86ddf8580175186f6ad42b
   languageName: node
   linkType: hard
 
@@ -10495,14 +10427,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resend@npm:^0.17.2":
-  version: 0.17.2
-  resolution: "resend@npm:0.17.2"
+"resend@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "resend@npm:2.1.0"
   dependencies:
-    "@react-email/render": "npm:0.0.7"
-    axios: "npm:1.4.0"
-    type-fest: "npm:3.13.0"
-  checksum: 6b6d7989cd74e79b237386b643fe4caf71db59e031ea856c8171ae8b3381742ed5629cf3deec154559e6bb12aba59048a4899f54e99b83cc02a7e02e9f6a1342
+    "@react-email/render": "npm:0.0.9"
+  checksum: 86279c7896e6cf7afddb145344cc937ce3ad6bd12ef89bc15a235410d73ba2fc942ef5436d422b97e4b0d8520bd92ccc8ab6d691ae6c0d5310e32809b49c8c17
   languageName: node
   linkType: hard
 
@@ -10829,15 +10759,6 @@ __metadata:
     nanoassert: "npm:^1.0.0"
     sodium-native: "npm:^3.1.1"
   checksum: f1f5d9211e1916801da75284c1e8a0ce25463fc1c27155831a490d1c1db2c3e50a09a76070a1bc5e84e9f6b1b3053642391f568a8f1ae0bad77a20a61f514740
-  languageName: node
-  linkType: hard
-
-"selderee@npm:^0.10.0":
-  version: 0.10.0
-  resolution: "selderee@npm:0.10.0"
-  dependencies:
-    parseley: "npm:^0.11.0"
-  checksum: 9d54c73139f1ff84d4f773bc8aa9ce529c7f38266470f3fd55e1879cf5f898a292bf02228695fddc5291e08cd832fef92b8d187841d43c609c8cef50d1db3ffa
   languageName: node
   linkType: hard
 
@@ -11858,13 +11779,6 @@ __metadata:
   dependencies:
     prelude-ls: "npm:^1.2.1"
   checksum: 7b3fd0ed43891e2080bf0c5c504b418fbb3e5c7b9708d3d015037ba2e6323a28152ec163bcb65212741fa5d2022e3075ac3c76440dbd344c9035f818e8ecee58
-  languageName: node
-  linkType: hard
-
-"type-fest@npm:3.13.0":
-  version: 3.13.0
-  resolution: "type-fest@npm:3.13.0"
-  checksum: 8d3f7ab432685a661b22484d64b4b1083a85c3db3eb01fee25cf4aa558b07bf2d6a42bbd072a4941da43072688f982ebb8b10b9f4444b3cb260d960f4ccf5c5c
   languageName: node
   linkType: hard
 

@@ -1,13 +1,14 @@
 import { resolver } from "@blitzjs/rpc";
 import db from "../../../../db";
 import EmailTemplateDummy from "../../../../mailers/react-email/emails/dummy";
-import { sendEmail } from "../../../../mailers/sendEmail";
 import { z } from "zod";
 import React from "react";
 import { generateUnsubscribeLink } from "@/utils/email";
 import { EmailList } from "@/features/email/types";
 import { chunk } from "lodash";
 import { isDev } from "@/config";
+import { Email } from "../../../../mailers/types";
+import { sendBulkEmail } from "../../../../mailers/sendBulkEmail";
 
 const Input = z.object({
   list: z.nativeEnum(EmailList)
@@ -44,23 +45,30 @@ export default resolver.pipe(
     const CHUNK_SIZE = isDev ? 3 : 100;
     const chunks = chunk(users, CHUNK_SIZE)
 
-    console.log('chunks', chunks.length)
+    for(const chunk of chunks) {
+      // create unsubscribe link and email for each user
+      const emails: Email[] = await Promise.all(
+        chunk.map(async (user): Promise<Email> => {
+          const unsubscribeLink = await generateUnsubscribeLink({
+            userId: user.id,
+            userEmail: user.email
+          })
+          return {
+            to: user.email,
+            subject: `Hey there ${user.name}`,
+            react: React.createElement(EmailTemplateDummy, {
+              props: {
+                name: user.name,
+                emailVerifyUrl: "",
+                unsubscribeLink
 
-    // const unsubscribeLink = await generateUnsubscribeLink({
-    //   userId: user.id,
-    //   userEmail: user.email,
-    // });
-    //
-    // await sendEmail({
-    //   to: user.email,
-    //   subject: "HEY",
-    //   react: React.createElement(EmailTemplateDummy, {
-    //     props: {
-    //       name: user.name,
-    //       emailVerifyUrl: "",
-    //       unsubscribeLink,
-    //     },
-    //   }),
-    // });
+              }
+            })
+          }
+        }
+      ))
+
+      await sendBulkEmail({emails})
+    }
   }
 );
